@@ -1,15 +1,17 @@
 pipeline {
     agent any
-    
     stages {
-        stage('Copy file to Minikube') {
+        stage('Checkout') {
             steps {
-                sh 'eval $(minikube docker-env) && docker cp nginx.yaml $(minikube docker-env | grep DOCKER_HOST | cut -d/ -f3-):/nginx.yaml'
+                // Checkout the Git repository
+                git 'https://github.com/shiva6933/kubenignix'
             }
         }
-        stage('Apply file to Minikube') {
+        
+        stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f nginx.yaml'
+                // Apply the Kubernetes configuration
+                sh 'kubectl apply -f nginx.yml -n default'
             }
         }
     }
