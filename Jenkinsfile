@@ -11,6 +11,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 // Apply the Kubernetes configuration
+                docker cp a54a150bea8d:/var/jenkins_home/workspace/pipleline/nginx /home/ubuntu
                 sh 'kubectl apply -f nginx.yml -n default'
             }
         }
