@@ -11,8 +11,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 // Apply the Kubernetes configuration
-                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-']) {
+                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443/api/*']) {
                 sh 'kubectl apply -f nginx.yml -n default'
                 }
             }
