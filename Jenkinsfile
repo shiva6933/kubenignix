@@ -11,8 +11,10 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 // Apply the Kubernetes configuration
-                sh 'docker cp a54a150bea8d:/var/jenkins_home/workspace/pipleline/nginx /home/ubuntu'
+                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://192.168.49.2:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+']) {
                 sh 'kubectl apply -f nginx.yml -n default'
+                }
             }
         }
     }
