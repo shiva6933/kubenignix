@@ -11,7 +11,7 @@ pipeline {
         stage('copy ngnix to minikube') {
             steps {
                 // Checkout the Git repository
-                docker cp 'a54a150bea8d:/var/jenkins_home/workspace/pipleline/nginx /home/ubuntu'
+                sh 'docker cp a54a150bea8d:/var/jenkins_home/workspace/pipleline/nginx /home/ubuntu'
             }
         }
         
